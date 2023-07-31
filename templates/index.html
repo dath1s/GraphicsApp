@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Система отрисовки</title>
+    <link rel="stylesheet" href="../static/styles/style.css"/>
+</head>
+<body>
+    <div class="workspace">
+        <div class="button-space">
+            <form method="POST" action="{{ url_for('save_project') }}" class="save-btn">
+                <button type="submit" class="button" id="savebtn">save project</button>
+            </form>
+
+            <div class="dropdown">
+                <button class="dropbtn">add polygon</button>
+                <div class="dropdown-content">
+
+                    <form method="POST" action="{{ url_for('add_polygon1') }}">
+                        <button type="submit" class="button-drop">по 1 оси</button>
+                    </form>
+
+                    <form method="POST" action="{{ url_for('add_polygon2') }}">
+                        <button type="submit" class="button-drop">по 2 осям</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <form method="POST" action="{{ url_for('reset_project') }}" class="reset-btn">
+                <button type="submit" class="button">reset project</button>
+            </form>
+        </div>
+
+        <div class="settings-view">
+
+            <div class="settings">
+                {% if polygon_type == 1: %}
+                <form action="" method="post">
+                    <p>
+                        <input type="text" id="width" class="in_field" name="width" placeholder="Ширина фигуры">
+                    </p>
+                    <p>
+                        <input type="text" id="y1_1d" class="in_field" name="y1" placeholder="Координата Y выше OX">
+                    </p>
+                    <p>
+                        <input type="text" id="y2_1d" class="in_field" name="y2" placeholder="Координата Y ниже OX">
+                    </p>
+                    <input type="submit" class="sub-btn-2d">
+                </form>
+                {% else %}
+                <form action="" method="post">
+                    <p>
+                        <input type="text" class="in_field2d" id="x1" name="x1" placeholder="Х1">
+                        <input type="text" class="in_field2d" id="y1" name="y1" placeholder="Y1">
+                    </p>
+                    <p>
+                        <input type="text" class="in_field2d" id="x2" name="x2" placeholder="X2">
+                        <input type="text" class="in_field2d" id="y2" name="y2" placeholder="Y2">
+                    </p>
+                    <p>
+                        <input type="text" class="in_field2d" id="x3" name="x3" placeholder="X3">
+                        <input type="text" class="in_field2d" id="y3" name="y3" placeholder="Y3">
+                    </p>
+                    <p>
+                        <input type="text" class="in_field2d" id="x4" name="x4" placeholder="X4">
+                        <input type="text" class="in_field2d" id="y4" name="y4" placeholder="Y4">
+                    </p>
+                    <input type="submit" class="sub-btn-2d">
+                </form>
+                {% endif %}
+
+                <div class="polygon-list">
+                    <ol>
+                        {% for i in range(start, ln)%}
+                            {{i}}. {{points[i]}}<br>
+                        {%endfor%}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="view">
+                <div class="Result"></div>
+                <div class="result-img">
+                    <img src="../static/img/polygon.svg">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

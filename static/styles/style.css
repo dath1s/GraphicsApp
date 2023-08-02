@@ -66,7 +66,7 @@
 }
 
 .button-drop{
-  width: 142px;
+  width: 192px;
   font-size: 20px;
   font-family: sans-serif;
 }
@@ -142,7 +142,7 @@ body{
 
 #savebtn{
   background-color: darkblue;
-  margin-left: 400px;
+  margin-left: 100px;
   border-radius: 40px;
 }
 
@@ -179,4 +179,25 @@ body{
 
 li{
   overflow: hidden;
+}
+
+.sub-btn-proj{
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 250px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: darkblue;
+  color: #fff;
+  font-size: 16px;
+  font-family: sans-serif;
+  border: none;
+}
+
+.sub-btn-proj:hover{
+  background-color: #0000be;
+}
+
+.space{
+  height: 10px;
 }

@@ -8,12 +8,12 @@
 <body>
     <div class="workspace">
         <div class="button-space">
-            <form method="POST" action="{{ url_for('save_project') }}" class="save-btn">
-                <button type="submit" class="button" id="savebtn">save project</button>
+            <form method="POST" action="{{ url_for('save') }}" class="save-btn">
+                <button type="submit" class="button" id="savebtn">Сохранить</button>
             </form>
 
             <div class="dropdown">
-                <button class="dropbtn">add polygon</button>
+                <button class="dropbtn">Добавить фигуру</button>
                 <div class="dropdown-content">
 
                     <form method="POST" action="{{ url_for('add_polygon1') }}">
@@ -28,7 +28,7 @@
             </div>
 
             <form method="POST" action="{{ url_for('reset_project') }}" class="reset-btn">
-                <button type="submit" class="button">reset project</button>
+                <button type="submit" class="button">Стереть все</button>
             </form>
         </div>
 

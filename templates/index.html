@@ -46,7 +46,7 @@
                     <p>
                         <input type="text" id="y2_1d" class="in_field" name="y2" placeholder="Координата Y ниже OX">
                     </p>
-                    <input type="submit" class="sub-btn-2d">
+                    <input type="submit" class="sub-btn-2d" value="Начертить">
                 </form>
                 {% else %}
                 <form action="" method="post">
@@ -66,14 +66,14 @@
                         <input type="text" class="in_field2d" id="x4" name="x4" placeholder="X4">
                         <input type="text" class="in_field2d" id="y4" name="y4" placeholder="Y4">
                     </p>
-                    <input type="submit" class="sub-btn-2d">
+                    <input type="submit" class="sub-btn-2d" value="Начертить">
                 </form>
                 {% endif %}
 
                 <div class="polygon-list">
                     <ol>
                         {% for i in range(start, ln)%}
-                            {{i}}. {{points[i]}}<br>
+                            {{i+1}}. {{points[i]}}<br>
                         {%endfor%}
                     </ol>
                 </div>

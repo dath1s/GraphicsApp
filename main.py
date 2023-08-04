@@ -104,7 +104,7 @@ def add_polygon1():
             if all([i is not None for i in [width, y1, y2]]):
                 width, y1, y2 = int(width), int(y1), int(y2)
 
-                size = max([size, width * 1.2, (y1 + y2) * 1.2])
+                size = max([size, width * 1.2, y1 * 2.4, y2 * 2.4])
                 center = size / 2
 
                 surface = cairo.SVGSurface('static/img/polygon.svg', size, size)
@@ -313,7 +313,9 @@ def save():
     if request.method == 'POST':
         customer, time, executor = request.form.get('customer'), request.form.get('time'), request.form.get('executor')
         if all([i is not None for i in [customer, time, executor]]):
-            print(customer, time, executor)
+            create_pdf()
+
+            return render_template('pdf_template.html', name1=customer, name2=executor, time=time, end=len(points), points=points)
 
     return render_template('save_page.html')
 

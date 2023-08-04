@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ФИО заказчика</th>
+        <th>ФИО исполнителя</th>
+        <th>Время оформления заказа</th>
+    </tr>
+    <tr>
+        <td>{{name1}}</td>
+        <td>{{name2}}</td>
+        <td>{{time}}</td>
+    </tr>
+</table>
+
+<div class="result-img">
+    <img src="../static/img/polygon_for_pdf.svg">
+</div>
+
+<table>
+    <tr>
+        <th>Номер фигуры</th>
+        <th>Точки</th>
+    </tr>
+    {% for i in range(0, end)%}
+    <tr>
+        <th>{{i+1}}</th>
+        <th>{{points[i]}}</th>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

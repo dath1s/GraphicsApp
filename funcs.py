@@ -1,8 +1,8 @@
 import math
-
 import cairo
 from math import sqrt, atan
-
+import pdfkit
+import svgutils.transform as sg
 
 def text(ctx, string, pos, theta=0.0, face='Georgia', font_size=18):
     ctx.save()
@@ -33,3 +33,9 @@ def calc_angle(point1, point2):
     if dx == 0:
         return math.pi / 2
     return atan((point2[1] - point1[1]) / dx)
+
+
+def create_pdf():
+    fig = sg.fromfile('static/img/polygon.svg')
+    fig.set_size(('900', '900'))
+    fig.save('static/img/polygon_for_pdf.svg')

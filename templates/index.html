@@ -1,92 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns: xmlns:>
 <head>
     <meta charset="UTF-8">
     <title>Система отрисовки</title>
     <link rel="stylesheet" href="../static/styles/style.css"/>
 </head>
 <body>
-    <div class="workspace">
-        <div class="button-space">
-            <form method="POST" action="{{ url_for('save') }}" class="save-btn">
-                <button type="submit" class="button" id="savebtn">Сохранить</button>
-            </form>
+<form method="post">
+    <div class="task-details">
+        <div class="details">
+            <label for="measurer">Замерщик</label>
+            <input id="measurer" name="measurer" placeholder="Иванов Иван Иванович" autocomplete="off" type="text"
+                   value={{measurer}}>
 
-            <div class="dropdown">
-                <button class="dropbtn">Добавить фигуру</button>
-                <div class="dropdown-content">
-
-                    <form method="POST" action="{{ url_for('add_polygon1') }}">
-                        <button type="submit" class="button-drop">по 1 оси</button>
-                    </form>
-
-                    <form method="POST" action="{{ url_for('add_polygon2') }}">
-                        <button type="submit" class="button-drop">по 2 осям</button>
-                    </form>
-
-                </div>
-            </div>
-
-            <form method="POST" action="{{ url_for('reset_project') }}" class="reset-btn">
-                <button type="submit" class="button">Стереть все</button>
-            </form>
+            <label for="date">Дата создания заказа</label>
+            <input type="date" name="date" id="date" placeholder="ДД.ММ.ГГГГ" autocomplete="off" value={{date}}>
         </div>
 
-        <div class="settings-view">
+        <div class="details">
+            <label for="orderer">Заказчик</label>
+            <input id="orderer" name="orderer" placeholder="Иванов Иван Иванович" autocomplete="off" value={{orderer}}>
 
-            <div class="settings">
-                {% if polygon_type == 1: %}
-                <form action="" method="post">
-                    <p>
-                        <input type="text" id="width" class="in_field" name="width" placeholder="Ширина фигуры">
-                    </p>
-                    <p>
-                        <input type="text" id="y1_1d" class="in_field" name="y1" placeholder="Координата Y выше OX">
-                    </p>
-                    <p>
-                        <input type="text" id="y2_1d" class="in_field" name="y2" placeholder="Координата Y ниже OX">
-                    </p>
-                    <input type="submit" class="sub-btn-2d" value="Начертить">
-                </form>
-                {% else %}
-                <form action="" method="post">
-                    <p>
-                        <input type="text" class="in_field2d" id="x1" name="x1" placeholder="Х1">
-                        <input type="text" class="in_field2d" id="y1" name="y1" placeholder="Y1">
-                    </p>
-                    <p>
-                        <input type="text" class="in_field2d" id="x2" name="x2" placeholder="X2">
-                        <input type="text" class="in_field2d" id="y2" name="y2" placeholder="Y2">
-                    </p>
-                    <p>
-                        <input type="text" class="in_field2d" id="x3" name="x3" placeholder="X3">
-                        <input type="text" class="in_field2d" id="y3" name="y3" placeholder="Y3">
-                    </p>
-                    <p>
-                        <input type="text" class="in_field2d" id="x4" name="x4" placeholder="X4">
-                        <input type="text" class="in_field2d" id="y4" name="y4" placeholder="Y4">
-                    </p>
-                    <input type="submit" class="sub-btn-2d" value="Начертить">
-                </form>
-                {% endif %}
+            <label for="phone-number">Номер телефона заказчика</label>
+            <input type="tel" id="phone-number" name="phone-number" placeholder="89990000000" autocomplete="off"
+                   maxlength="11" value={{phone_number}}>
+        </div>
 
-                <div class="polygon-list">
-                    <ol>
-                        {% for i in range(start, ln)%}
-                            {{i+1}}. {{points[i]}}<br>
-                        {%endfor%}
-                    </ol>
-                </div>
-            </div>
+        <div class="details">
+            <label for="address">Улица</label>
+            <input id="address" name="address" placeholder="ул.Ленина" autocomplete="off" value={{street}}>
 
-            <div class="view">
-                <div class="Result"></div>
-                <div class="result-img">
-                    <img src="../static/img/polygon.svg">
-                </div>
-            </div>
+            <label for="flat-number">Квартира</label>
+            <input id="flat-number" name="flat-number" autocomplete="off" class="short-input" value={{flat}}>
 
+            <label for="floor-number">Этаж</label>
+            <input id="floor-number" name="floor-number" autocomplete="off" class="short-input" value={{floor}}>
+        </div>
+
+        <div class="details">
+            Примечание<br>
+            <textarea id="comments" name="comments">{{comment}}</textarea>
         </div>
     </div>
+
+    <div class="draw-space">
+        {% for i in range(0, len) %}
+            <div class={{polygons[i]}} id="draw-block">
+                {% if polygons[i][0] == '1' %}
+                <div class="setting1d">
+                    <form method="post" action="">
+                        <label for="y1">Y1</label>
+                        <input id="y1" name={{"y1_{}".format(polygons[i][2:])}} class="short-input">
+                        <br>
+                        <label for="y2">Y2</label>
+                        <input id="y2" name={{"y2_{}".format(polygons[i][2:])}} class="short-input">
+                        <br>
+                        <label for="width">Ширина</label>
+                        <input id="width" name={{"width_{}".format(polygons[i][2:])}} class="short-input">
+                        <br>
+                        <input type="submit" name={{"add_points_1d_{}".format(polygons[i][2:])}} onclick="add_pol()">
+                    </form>
+                </div>
+                <div id="view_draw">
+                    <img src={{"../static/img/polygon{}.svg".format(polygons[i][2:])}}>
+                </div>
+                {% else %}
+                <div class="setting1d">
+                    <label for="x1-2d">x1</label>
+                    <input id="x1-2d" name={{"x1_{}".format(polygons[i][2:])}} class="short-input">
+                    <label for="y1-2d">y1</label>
+                    <input id="y1-2d" name={{"y1_{}".format(polygons[i][2:])}} class="short-input">
+                    <br>
+                    <label for="x2-2d">x2</label>
+                    <input id="x2-2d" name={{"x2_{}".format(polygons[i][2:])}} class="short-input">
+                    <label for="y2-2d">y2</label>
+                    <input id="y2-2d" name={{"y2_{}".format(polygons[i][2:])}} class="short-input">
+                    <br>
+                    <label for="x3-2d">x3</label>
+                    <input id="x3-2d" name={{"x3_{}".format(polygons[i][2:])}} class="short-input">
+                    <label for="y3-2d">y3</label>
+                    <input id="y3-2d" name={{"y3_{}".format(polygons[i][2:])}} class="short-input">
+                    <br>
+                    <label for="x4-2d">x4</label>
+                    <input id="x4-2d" name={{"x4_{}".format(polygons[i][2:])}} class="short-input">
+                    <label for="y4-2d">y4</label>
+                    <input id="y4-2d" name={{"y4_{}".format(polygons[i][2:])}} class="short-input">
+                    <br>
+                    <input type="submit" name={{"add_points_2d_{}".format(polygons[i][2:])}} onclick="add_pol()">
+                </div>
+                <div id="view_draw2">
+                    <img src={{"../static/img/polygon{}.svg".format(polygons[i][2:])}}>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="buttons-space">
+        <form class="axis-type-from" method="post">
+            <label for="draw-type">Построить чертёж по</label>
+            <select id="draw-type" name="draw-type">
+                <option value="1axis">1 оси</option>
+                <option value="2axis">2 осям</option>
+            </select>
+
+            <input type="submit" value="Добавить чертёж" name="add_draw" onclick="add_pol()">
+        </form>
+        <script>
+            function add_pol(){
+                localStorage['scrollY'] = window['scrollY'];
+            }
+
+            function f() {
+                window.scroll(0, localStorage['scrollY']);
+                localStorage.removeItem('scrollY');
+            }
+
+            window.onload = f
+        </script>
+    </div>
+</form>
 </body>
 </html>

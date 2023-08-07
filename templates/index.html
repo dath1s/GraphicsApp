@@ -58,7 +58,12 @@
                         <label for="width">Ширина</label>
                         <input id="width" name={{"width_{}".format(polygons[i][2:])}} class="short-input">
                         <br>
-                        <input type="submit" name={{"add_points_1d_{}".format(polygons[i][2:])}} onclick="add_pol()">
+                        <input type="submit" name={{"add_points_1d_{}".format(polygons[i][2:])}} onclick="stay_place()">
+                        <div class="point-list1d">
+                            {% for i in point_arr["{}".format(polygons[i][2:])]%}
+                            y1: {{i[0]}}; y2: {{i[1]}}; width: {{i[2]}}<br>
+                            {% endfor %}
+                        </div>
                     </form>
                 </div>
                 <div id="view_draw">
@@ -86,7 +91,12 @@
                     <label for="y4-2d">y4</label>
                     <input id="y4-2d" name={{"y4_{}".format(polygons[i][2:])}} class="short-input">
                     <br>
-                    <input type="submit" name={{"add_points_2d_{}".format(polygons[i][2:])}} onclick="add_pol()">
+                    <input type="submit" name={{"add_points_2d_{}".format(polygons[i][2:])}} onclick="stay_place()">
+                    <div class="point-list">
+                        {% for i in point_arr["{}".format(polygons[i][2:])]%}
+                        ({{i[0]}}, {{i[1]}}), ({{i[2]}}, {{i[3]}}), ({{i[4]}}, {{i[5]}}), ({{i[6]}}, {{i[7]}})<br>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div id="view_draw2">
                     <img src={{"../static/img/polygon{}.svg".format(polygons[i][2:])}}>
@@ -104,10 +114,15 @@
                 <option value="2axis">2 осям</option>
             </select>
 
-            <input type="submit" value="Добавить чертёж" name="add_draw" onclick="add_pol()">
+            <input type="submit" class="add" value="Добавить чертёж" name="add_draw" onclick="stay_place()">
+            <input type="submit" class="clear" value="Очистить всё" name="reset" onclick="stay_place()">
+            {% if download_access %}
+                <input type="submit" class="savesvg" value="Скачать .svg" name="download-svg" onclick="stay_place()">
+                <input type="submit" class="savepdf" value="Скачать .pdf" name="download-svg" onclick="stay_place()">
+            {% endif %}
         </form>
         <script>
-            function add_pol(){
+            function stay_place(){
                 localStorage['scrollY'] = window['scrollY'];
             }
 

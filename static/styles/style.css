@@ -30,6 +30,7 @@ textarea{
     margin-left: 20px;
     font-family: sans-serif;
     margin-top: 10px;
+    overflow: auto;
 }
 
 #date{

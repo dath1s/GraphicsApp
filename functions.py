@@ -1,6 +1,6 @@
 import cairo
 import svgutils.transform as sg
-from math import pi
+from math import pi, sqrt, atan
 from config import *
 
 size = 535
@@ -60,7 +60,7 @@ def create_axis(ctx, img_size):
 
 
 def create_surface_1d(path, savepath, points=None):
-    img_size = 50
+    img_size = 150
 
     if points:
         max_y1, max_y2, max_width = max([i[0] for i in points]), max([i[1] for i in points]), max(
@@ -142,7 +142,7 @@ def create_surface_1d(path, savepath, points=None):
 
 
 def create_surface_2d(path, savepath, points=None):
-    img_size = 50
+    img_size = 150
 
     if points:
         max_x1, max_y1, max_x2, max_y2, max_x3, max_y3, max_x4, max_y4 = max([i[0] for i in points]), max(
@@ -185,6 +185,28 @@ def create_surface_2d(path, savepath, points=None):
                 surf.set_line_width(img_size / 400)
                 surf.stroke()
                 surf.close_path()
+
+        for cord_arr in points:
+            x1, y1, x2, y2, x3, y3, x4, y4 = cord_arr
+            x2 = -x2
+            x3 = -x3
+            y3 = -y3
+            y4 = -y4
+
+            def side_len(x1, y1, x2, y2):
+                return round(sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2), 3)
+
+            def calc_theta(x1, y1, x2, y2):
+                return atan((y1 + y2) / (x1 + x2)) if x1 + x2 else 0 if y1 + y2 else pi/2
+
+            text(ctx, str(side_len(x1, y1, x2, y2)), (img_size / 2 + (x2 + x1) / 2, img_size / 2 - (y1 + y2) / 2),
+                 font_size=img_size // 38, theta=calc_theta(x1, y1, x2, y2))
+            text(ctx, str(side_len(x2, y2, x3, y3)), (img_size / 2 + (x2 + x3) / 2, img_size / 2 - (y2 + y3) / 2),
+                 font_size=img_size // 38, theta=calc_theta(x2, y2, x3, y3))
+            text(ctx, str(side_len(x3, y3, x4, y4)), (img_size / 2 + (x3 + x4) / 2, img_size / 2 - (y3 + y4) / 2),
+                 font_size=img_size // 38, theta=calc_theta(x3, y3, x4, y4))
+            text(ctx, str(side_len(x4, y4, x1, y1)), (img_size / 2 + (x4 + x1) / 2, img_size / 2 - (y4 + y1) / 2),
+                 font_size=img_size // 38, theta=calc_theta(x4, y4, x1, y1))
 
     surface.finish()
     surface.flush()

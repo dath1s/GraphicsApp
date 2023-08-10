@@ -129,16 +129,32 @@ select{
     width: 200px;
 }
 
+.add:hover{
+    background-color: #8888;
+}
+
 .clear{
     width: 200px;
+}
+
+.clear:hover{
+    background-color: #8888;
 }
 
 .savesvg{
     width: 200px;
 }
 
+.savesvg:hover{
+    background-color: #8888;
+}
+
 .savepdf{
     width: 200px;
+}
+
+.savepdf:hover{
+    background-color: #8888;
 }
 
 .point-list{
@@ -163,4 +179,8 @@ select{
     margin-top: 50px;
     color: black;
     overflow: auto;
+}
+
+.generate:hover{
+    background-color: #8888;
 }

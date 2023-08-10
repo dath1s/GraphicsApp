@@ -27,8 +27,8 @@
         </div>
 
         <div class="details">
-            <label for="address">Улица</label>
-            <input id="address" name="address" placeholder="ул.Ленина" autocomplete="off" value={{street}}>
+            <label for="address">Дом</label>
+            <input id="address" name="address" placeholder="ул.Ленина 1" autocomplete="off" value={{street}}>
 
             <label for="flat-number">Квартира</label>
             <input id="flat-number" name="flat-number" autocomplete="off" class="short-input" value={{flat}}>
@@ -50,15 +50,15 @@
                 <div class="setting1d">
                     <form method="post" action="">
                         <label for="y1">Y1</label>
-                        <input id="y1" name={{"y1_{}".format(polygons[i][2:])}} class="short-input">
+                        <input id="y1" name={{"y1_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                         <br>
                         <label for="y2">Y2</label>
-                        <input id="y2" name={{"y2_{}".format(polygons[i][2:])}} class="short-input">
+                        <input id="y2" name={{"y2_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                         <br>
                         <label for="width">Ширина</label>
-                        <input id="width" name={{"width_{}".format(polygons[i][2:])}} class="short-input">
+                        <input id="width" name={{"width_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                         <br>
-                        <input type="submit" name={{"add_points_1d_{}".format(polygons[i][2:])}} onclick="stay_place()">
+                        <input type="submit" name={{"add_points_1d_{}".format(polygons[i][2:])}} onclick="stay_place()" class="generate" value="Сгенерировать">
                         <div class="point-list1d">
                             {% for i in point_arr["{}".format(polygons[i][2:])]%}
                             y1: {{i[0]}}; y2: {{i[1]}}; width: {{i[2]}}<br>
@@ -72,26 +72,26 @@
                 {% else %}
                 <div class="setting1d">
                     <label for="x1-2d">x1</label>
-                    <input id="x1-2d" name={{"x1_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="x1-2d" name={{"x1_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <label for="y1-2d">y1</label>
-                    <input id="y1-2d" name={{"y1_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="y1-2d" name={{"y1_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <br>
                     <label for="x2-2d">x2</label>
-                    <input id="x2-2d" name={{"x2_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="x2-2d" name={{"x2_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <label for="y2-2d">y2</label>
-                    <input id="y2-2d" name={{"y2_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="y2-2d" name={{"y2_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <br>
                     <label for="x3-2d">x3</label>
-                    <input id="x3-2d" name={{"x3_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="x3-2d" name={{"x3_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <label for="y3-2d">y3</label>
-                    <input id="y3-2d" name={{"y3_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="y3-2d" name={{"y3_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <br>
                     <label for="x4-2d">x4</label>
-                    <input id="x4-2d" name={{"x4_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="x4-2d" name={{"x4_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <label for="y4-2d">y4</label>
-                    <input id="y4-2d" name={{"y4_{}".format(polygons[i][2:])}} class="short-input">
+                    <input id="y4-2d" name={{"y4_{}".format(polygons[i][2:])}} class="short-input" autocomplete="off">
                     <br>
-                    <input type="submit" name={{"add_points_2d_{}".format(polygons[i][2:])}} onclick="stay_place()">
+                    <input type="submit" name={{"add_points_2d_{}".format(polygons[i][2:])}} onclick="stay_place()" class="generate" value="Сгенерировать">
                     <div class="point-list">
                         {% for i in point_arr["{}".format(polygons[i][2:])]%}
                         ({{i[0]}}, {{i[1]}}), ({{i[2]}}, {{i[3]}}), ({{i[4]}}, {{i[5]}}), ({{i[6]}}, {{i[7]}})<br>

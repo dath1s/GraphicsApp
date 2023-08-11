@@ -197,7 +197,7 @@ def create_surface_2d(path, savepath, points=None):
                 return round(sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2), 3)
 
             def calc_theta(x1, y1, x2, y2):
-                return atan((y1 + y2) / (x1 + x2)) if x1 + x2 else 0 if y1 + y2 else pi/2
+                return 0 if y1 == y2 else pi/2 if x1 == x2 else atan((y1 + y2) / (x1 + x2))
 
             text(ctx, str(side_len(x1, y1, x2, y2)), (img_size / 2 + (x2 + x1) / 2, img_size / 2 - (y1 + y2) / 2),
                  font_size=img_size // 38, theta=calc_theta(x1, y1, x2, y2))

@@ -1,0 +1,2 @@
+Flask~=2.3.2
+svgutils~=0.3.4

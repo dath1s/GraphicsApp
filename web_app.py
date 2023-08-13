@@ -94,7 +94,9 @@ def index():
 
                 pdf.cell(0, 5, txt=f'Исполнитель: {last_values["measurer"]}  Дата: {last_values["date"]}', ln=1)
                 pdf.cell(0, 5,
-                         txt=f'Заказчик: {last_values["orderer"]}  Телефон: {last_values["phone-number"]}  Улица: {last_values["street"]}  Квартира: {last_values["flat"]}  Этаж: {last_values["floor"]}',
+                         txt=f'Заказчик: {last_values["orderer"]}  Телефон: {last_values["phone-number"]}' +
+                             f'  Улица: {last_values["street"]}  Квартира: {last_values["flat"]}' +
+                             f'  Этаж: {last_values["floor"]}',
                          ln=1)
                 pdf.cell(0, 5, txt=f'Комментарий: {last_values["comment"]}', ln=1)
                 pdf.cell(0, 120, txt="", ln=1)

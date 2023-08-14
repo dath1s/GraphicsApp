@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Бланк заказа</title>
+    <link rel="stylesheet" href="../static/styles/style.css"/>
+</head>
+<body>
+Исполнитель: {{ measurer }} Дата: {{ date }}
+<br>
+Заказчик: {{ orderer }} Телефон: {{ phone_number }} Улица: {{ street }} Квартира: {{ flat }} Этаж: {{ floor }}
+<br>
+Комментарий: {{ comment }}
+<br><br>
+{% for i in range(0, count) %}
+    <div>
+        <img src={{ "../static/svg_for_pdf/pdf_polygon{}.svg".format(i) }}>
+        <br>
+        <table class="table">
+            <tr>
+                <td>Номер чертежа</td>
+                <td>Параметры фигуры</td>
+                {% for point_arr in polygons_arrays["{}".format(i)] %}
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        {% if polyg_type_arr[i][0] == "1" %}
+                        <td>Y1: {{ point_arr[0] }}; Y2: {{ point_arr[1] }}; WIDTH: {{ point_arr[2] }}</td>
+                        {% else %}
+                        <td>({{ point_arr[0] }}, {{ point_arr[1] }}), ({{ point_arr[2] }}, {{ point_arr[3] }}), ({{ point_arr[4] }}, {{ point_arr[5] }}), ({{ point_arr[6] }}, {{ point_arr[7] }})</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tr>
+        </table>
+
+    </div><br>
+{% endfor %}
+</body>
+</html>

@@ -136,7 +136,7 @@ def create_surface_1d(path, savepath, points=None):
 
     resize_svg(path, size)
     resize_svg(savepath, 1000)
-    resize_svg(path, 100, f'{svg_for_pdf_dir}/{path.split("/")[-1]}')
+    resize_svg(path, 500, f'{svg_for_pdf_dir}/{path.split("/")[-1]}')
 
     percent_to_int_svg(f'{svg_for_pdf_dir}/{path.split("/")[-1]}', f'{svg_for_pdf_dir}/pdf_{path.split("/")[-1]}')
 
@@ -216,6 +216,6 @@ def create_surface_2d(path, savepath, points=None):
 
     resize_svg(path, size)
     resize_svg(savepath, 1000)
-    resize_svg(path, 100, f'{svg_for_pdf_dir}/{path.split("/")[-1]}')
+    resize_svg(path, 500, f'{svg_for_pdf_dir}/{path.split("/")[-1]}')
 
     percent_to_int_svg(f'{svg_for_pdf_dir}/{path.split("/")[-1]}', f'{svg_for_pdf_dir}/pdf_{path.split("/")[-1]}')

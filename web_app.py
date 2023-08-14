@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, send_file
 
 from zipfile import ZipFile
 import os
-from fpdf import FPDF
+# from fpdf import FPDF
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = secret_key
@@ -84,36 +84,49 @@ def index():
             return send_file(f'{svg_zip_dir}/svg_zip.zip')
 
         elif 'download-pdf' in request.form:
-            pdf = FPDF(format='A4')
-
-            pdf.add_font('DejaVu', '', 'static/fonts/DejaVuSansCondensed.ttf', uni=True)
-
-            for path in range(count):
-                pdf.add_page()
-                pdf.set_font('DejaVu', '', 10)
-
-                pdf.cell(0, 5, txt=f'Исполнитель: {last_values["measurer"]}  Дата: {last_values["date"]}', ln=1)
-                pdf.cell(0, 5,
-                         txt=f'Заказчик: {last_values["orderer"]}  Телефон: {last_values["phone-number"]}' +
-                             f'  Улица: {last_values["street"]}  Квартира: {last_values["flat"]}' +
-                             f'  Этаж: {last_values["floor"]}',
-                         ln=1)
-                pdf.cell(0, 5, txt=f'Комментарий: {last_values["comment"]}', ln=1)
-                pdf.cell(0, 120, txt="", ln=1)
-
-                pdf.image(f'{svg_for_pdf_dir}/pdf_polygon{path}.svg', x=0, y=40)
-
-                pdf.cell(0, 5, txt='Заданные фигуры:', ln=1)
-                for point_arr in polygons_arrays[str(path)]:
-                    def point_arr_to_pdf(arr):
-                        if len(arr) == 3:
-                            return f'y1: {arr[0]}   y2: {arr[1]}   width: {arr[2]}'
-                        return f'({arr[0]}, {arr[1]}), ({arr[2]}, {arr[3]}), ({arr[4]}, {arr[5]}), ({arr[6]}, {arr[7]})'
-
-                    pdf.cell(0, 5, txt=point_arr_to_pdf(point_arr), ln=1)
-
-            pdf.output(f'{pdf_dir}/out.pdf')
-            return send_file(f'{pdf_dir}/out.pdf')
+            # pdf = FPDF(format='A4')
+            #
+            # pdf.add_font('DejaVu', '', 'static/fonts/DejaVuSansCondensed.ttf', uni=True)
+            #
+            # for path in range(count):
+            #     pdf.add_page()
+            #     pdf.set_font('DejaVu', '', 10)
+            #
+            #     pdf.cell(0, 5, txt=f'Исполнитель: {last_values["measurer"]}  Дата: {last_values["date"]}', ln=1)
+            #     pdf.cell(0, 5,
+            #              txt=f'Заказчик: {last_values["orderer"]}  Телефон: {last_values["phone-number"]}' +
+            #                  f'  Улица: {last_values["street"]}  Квартира: {last_values["flat"]}' +
+            #                  f'  Этаж: {last_values["floor"]}',
+            #              ln=1)
+            #     pdf.cell(0, 5, txt=f'Комментарий: {last_values["comment"]}', ln=1)
+            #     pdf.cell(0, 120, txt="", ln=1)
+            #
+            #     pdf.image(f'{svg_for_pdf_dir}/pdf_polygon{path}.svg', x=0, y=40)
+            #
+            #     pdf.cell(0, 5, txt='Заданные фигуры:', ln=1)
+            #     for point_arr in polygons_arrays[str(path)]:
+            #         def point_arr_to_pdf(arr):
+            #             if len(arr) == 3:
+            #                 return f'y1: {arr[0]}   y2: {arr[1]}   width: {arr[2]}'
+            #             return f'({arr[0]}, {arr[1]}), ({arr[2]}, {arr[3]}), ({arr[4]}, {arr[5]}), ({arr[6]}, {arr[7]})'
+            #
+            #         pdf.cell(0, 5, txt=point_arr_to_pdf(point_arr), ln=1)
+            #
+            # pdf.output(f'{pdf_dir}/out.pdf')
+            # return send_file(f'{pdf_dir}/out.pdf')
+            return render_template("blank.html",
+                                   measurer=last_values['measurer'] if last_values['measurer'] else '',
+                                   date=last_values['date'] if last_values['date'] else '',
+                                   orderer=last_values['orderer'] if last_values['orderer'] else '',
+                                   phone_number=last_values['phone-number'] if last_values['phone-number'] else '',
+                                   street=last_values['street'] if last_values['street'] else '',
+                                   flat=last_values['flat'] if last_values['flat'] else '',
+                                   floor=last_values['floor'] if last_values['floor'] else '',
+                                   comment=last_values['comment'] if last_values['comment'] else '',
+                                   count=count,
+                                   polygons_arrays=polygons_arrays,
+                                   polyg_type_arr=polygons
+                                   )
 
         else:
             post_form = request.form
